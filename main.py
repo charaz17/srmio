@@ -11,7 +11,7 @@ def detect_emotion(img):
 
 
 def main():
-    img = cv2.imread("images/h13.jpg")
+    img = cv2.imread("validating_data/h2.jpg")
     cv2.imshow('Determined emotions', img)
 
     global loaded_model
@@ -42,7 +42,7 @@ def main():
 #
 # if __name__ == '__main__':
 #     # SAMPLE_IMAGE_PATH = sys.argv[1]
-#     img = cv2.imread(cv2.samples.findFile("images/a1.jpg"))
+#     img = cv2.imread(cv2.samples.findFile("validating_data/a1.jpg"))
 #     main(img)
 if __name__ == '__main__':
     main()
