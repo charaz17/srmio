@@ -1,10 +1,8 @@
 from io import BytesIO
-
 import numpy
 from flask import Flask, request, redirect, render_template
 from PIL import Image
 import base64
-
 import cv2
 from tensorflow.keras.models import model_from_json
 import numpy as np
@@ -37,13 +35,14 @@ def index():
                 image_new.save(buf, 'jpeg')
                 image_bytes = buf.getvalue()
             encoded_string = base64.b64encode(image_bytes).decode()
-        return render_template('index.html', img_data="data:image/jpeg;base64,"+ encoded_string), 200
+        return render_template('index.html', img_data="data:image/jpeg;base64," + encoded_string), 200
     else:
         return render_template('index.html', img_data=""), 200
 
 
 def detect_emotion(img):
     emotions_list = ["Angry", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
+    print(loaded_model.predict(img))
     return emotions_list[np.argmax(loaded_model.predict(img))]
 
 
@@ -53,7 +52,6 @@ def process_image(img):
         loaded_model_json = json_file.read()
         loaded_model = model_from_json(loaded_model_json)
 
-        # load weights into the new model
         loaded_model.load_weights("model_weights.h5")
         loaded_model.make_predict_function()
 
